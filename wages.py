@@ -1,15 +1,8 @@
 def even_or_odd(value):
-    value2 = value/2
-    if value2 == round(value2,ndigits=0):
+    if value%2 == 0:
         return "Even"
     else:
         return "Odd"
-
-
-
-
-
-
 
 def positive_bool_input_limited(question,limit): #would be better to give this a maximum.
     while True:
@@ -17,39 +10,42 @@ def positive_bool_input_limited(question,limit): #would be better to give this a
             output = float(input(question))
             if output >= 0 and (output <= limit or limit == 0):
                 return output
-            elif output <= limit:
+            else:
                 print(f"Input must be less than {limit}!")
         except:
             print("Enter a positive integer ._.")
 
+def main():
+    while True:
+        # math stuff
+        Hours = positive_bool_input_limited("How many hours will you work daily? ",24)
+        Wage = positive_bool_input_limited("What is your hourly wage? ",0)
+        DaysWorked = positive_bool_input_limited("How many days have you worked? ",365)
+
+        AnualBeforeTax = Hours*Wage*DaysWorked
+        Taxes = AnualBeforeTax*0.12
+        AnualAfterTax = AnualBeforeTax - Taxes
+
+        # Print stuff
+        print(f"Pay Advice\n-------------\nHours Worked: {Hours}\nHourly wages: ${Wage:.2f}\nWages Before Taxes: ${AnualBeforeTax:.2f}\nTax Ammount: ${Taxes:.2f}\nAnnual Wage After Taxes: ${AnualAfterTax:.2f}")
+
+        while True:
+            answer = input("Would you like to run the program again? y/n ")
+            if answer == "y":
+                break
+            if answer == "n":
+                break
+        if answer == "n":
+                break
+        
+                
+main()
 
 
 
-Hours = positive_bool_input_limited("How many hours will you work daily? ",24)
-Wage = positive_bool_input_limited("What is your hourly wage? ",0)
-DaysWorked = positive_bool_input_limited("How many days have you worked? ",365)
+    
 
-print(f"Pay Advice\n-------------")
-print(f"Hours Worked: {Hours}")
-print(f"Hourly wages: ${Wage:.2f}")
-
-
-AnualBeforeTax = Hours*Wage*DaysWorked
-Taxes = AnualBeforeTax*0.12
-AnualAfterTax = AnualBeforeTax - Taxes
-
-print(f"Wages Before Taxes: ${AnualBeforeTax:.2f}")
-print(f"Tax Ammount: ${Taxes:.2f}")
-print(f"Annual Wage After Taxes: ${AnualAfterTax:.2f}")
-
-input()
-stuff = int(input("Give number"))
-
-print(even_or_odd(stuff))
-
-
-
-
+#It is convention not to have any code after Main():, so do this but with program as function and loop in main.
 
 
 
@@ -77,10 +73,6 @@ print(even_or_odd(stuff))
 # tax amount
 # annual wages after taxes
 # money values should be printed with a $ sign and all numbers should be rounded to 2 decimal places
-
-
-
-
 
 
 
@@ -127,3 +119,6 @@ def even_or_odd_bad(value):
         return "even"
     elif value == 21:
         return "odd"
+
+
+

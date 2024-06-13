@@ -103,3 +103,4 @@ if input() == "Yes":
   game()
   if input() == "No":
     print("die")
+
