@@ -9,3 +9,10 @@ main()
 #NEVER ACCTUALY USE PASS, ONLY USE AS A PLACEHOLDER
 
 #W3 schools is a super good rescource
+
+names = ["billy","bob","joe","bill","globert"]
+
+for i in range(0,len(names)):
+    print(names[i])
+
+
