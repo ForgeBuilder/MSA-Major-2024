@@ -1,6 +1,6 @@
 primes = [1]
 
-for num in range(1,1000):
+for num in range(1,10):
     print(f"checking {num}")
     for i in range(1,num+1):
         if i == 1:
