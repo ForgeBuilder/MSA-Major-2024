@@ -11,8 +11,6 @@
 
 # b1 c2
 
-letters = ["a","b","c","d","e","f","g","h"]
-
 board = [
     ["[ ]","[0]","[ ]","[0]","[ ]","[0]","[ ]","[0]"],
     ["[0]","[ ]","[0]","[ ]","[0]","[ ]","[0]","[ ]"],
@@ -24,7 +22,7 @@ board = [
     ["[1]","[ ]","[1]","[ ]","[1]","[ ]","[1]","[ ]"]
 ]
 
-top = "   1  2  3  4  5  6  7  8"
+top = "   a  b  c  d  e  f  g  h"
 
 player_names = []
 player_indicators = []
@@ -78,10 +76,22 @@ while True:
             else:
                 to_draw = to_draw + space
             
-        print(letters[i]+" "+to_draw)
+        print(str(i-1)+" "+to_draw) #puts the numbers to left of board
         i += 1
 
-    print(f"It is {move}'s turn.")
-    if input() == "stop":
+    print(f"It is {player_names[move]}'s turn.")
+
+    game_input = input()
+
+    if game_input == "stop":
         break
+    
+    #The inpupt structure for a move is naming the target spaces. IE a6 b5, or a6 c4 if you are capturing.
+    game_input
+
+    #THIS IS THE CODE FOR MAKING A MOVE.
+
+    #use capital letter for kings.
+
+
   
