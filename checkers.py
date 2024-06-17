@@ -11,6 +11,8 @@
 
 # b1 c2
 
+letters = {"a":1,"b":2,"c":3,"d":4,"e":5,"f":6,"g":7,"h":8}
+
 board = [
     ["[ ]","[0]","[ ]","[0]","[ ]","[0]","[ ]","[0]"],
     ["[0]","[ ]","[0]","[ ]","[0]","[ ]","[0]","[ ]"],
@@ -57,7 +59,7 @@ input("Press enter to start.")
 
 
 
-move = 0 #this is not done
+who_move = 0 #this is not done
 
 #ABOVE HERE IS SETUP  ^^^^
 
@@ -76,22 +78,36 @@ while True:
             else:
                 to_draw = to_draw + space
             
-        print(str(i-1)+" "+to_draw) #puts the numbers to left of board
+        print(str(i+1)+" "+to_draw) #puts the numbers to left of board
         i += 1
 
-    print(f"It is {player_names[move]}'s turn.")
+    print(f"It is {player_names[who_move]}'s turn.")
 
-    game_input = input()
+    while True:
+        game_input = input()
 
-    if game_input == "stop":
-        break
+        if game_input == "stop":
+            break
+        
+        #The inpupt structure for a move is naming the target spaces. IE a6b5, or a6c4 if you are capturing.
+        try:
+            game_input
+            move_to_try = [
+                str(letters[game_input[1]]),
+                int(game_input[2]),
+                str(letters[game_input[3]]),
+                int(game_input[4])
+                ]
+            break
+        except:
+            continue
+
+
+
+        #THIS IS THE CODE FOR MAKING A MOVE.
+
+        #use capital letter for kings.
+
+
     
-    #The inpupt structure for a move is naming the target spaces. IE a6 b5, or a6 c4 if you are capturing.
-    game_input
-
-    #THIS IS THE CODE FOR MAKING A MOVE.
-
-    #use capital letter for kings.
-
-
-  
+        
