@@ -14,14 +14,14 @@
 letters = {"a":1,"b":2,"c":3,"d":4,"e":5,"f":6,"g":7,"h":8}
 
 board = [
-    ["[ ]","[0]","[ ]","[0]","[ ]","[0]","[ ]","[0]"],
-    ["[0]","[ ]","[0]","[ ]","[0]","[ ]","[0]","[ ]"],
-    ["[ ]","[0]","[ ]","[0]","[ ]","[0]","[ ]","[0]"],
-    ["[ ]","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"],
-    ["[ ]","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"],
-    ["[1]","[ ]","[1]","[ ]","[1]","[ ]","[1]","[ ]"],
-    ["[ ]","[1]","[ ]","[1]","[ ]","[1]","[ ]","[1]"],
-    ["[1]","[ ]","[1]","[ ]","[1]","[ ]","[1]","[ ]"]
+    ["   ","[0]","   ","[0]","   ","[0]","   ","[0]"],
+    ["[0]","   ","[0]","   ","[0]","   ","[0]","   "],
+    ["   ","[0]","   ","[0]","   ","[0]","   ","[0]"],
+    ["[ ]","   ","[ ]","   ","[ ]","   ","[ ]","   "],
+    ["   ","[ ]","   ","[ ]","   ","[ ]","   ","[ ]"],
+    ["[1]","   ","[1]","   ","[1]","   ","[1]","   "],
+    ["   ","[1]","   ","[1]","   ","[1]","   ","[1]"],
+    ["[1]","   ","[1]","   ","[1]","   ","[1]","   "]
 ]
 
 top = "   a  b  c  d  e  f  g  h"
@@ -35,10 +35,12 @@ player_indicators = []
 
 print("The first letter of your name will be the symbol of your piece.") #implement error checking to make sure nobody chooses numbers
 
-player_names.append(input("Player one's name? "))
+player_one_name = input("Player one's name? ").lower()
+
+player_names.append(player_one_name)
 
 while True:
-    player_two_name = input("Player two's name? ")
+    player_two_name = input("Player two's name? ").lower()
     if player_two_name[0] != player_names[0][0]:
         player_names.append(player_two_name)
         break
@@ -51,22 +53,17 @@ print(f"Player 2: {player_names[1]} symbol = {player_names[1][0]}")
 input("Press enter to start.")
 
 
-
-
-
-
-
-
-
-
-who_move = 0 #this is not done
+who_move = 0
+who_not_move = 1
 
 #ABOVE HERE IS SETUP  ^^^^
+
+# BIG BREAK IN FUNCTIONALITY HERE (not boken just diffrent stuff)
 
 #THIS IS THE GAME LOOP vvvvv
 
 while True:
-    i = 0
+    row_number = 0
     print(top)
     for row in board:
         to_draw = ""
@@ -78,8 +75,8 @@ while True:
             else:
                 to_draw = to_draw + space
             
-        print(str(i+1)+" "+to_draw) #puts the numbers to left of board
-        i += 1
+        print(str(row_number+1)+" "+to_draw) #puts the numbers to left of board
+        row_number += 1
 
     print(f"It is {player_names[who_move]}'s turn.")
 
@@ -90,18 +87,64 @@ while True:
             break
         
         #The inpupt structure for a move is naming the target spaces. IE a6b5, or a6c4 if you are capturing.
+
+        
+
         try:
-            game_input
-            move_to_try = [
-                str(letters[game_input[1]]),
-                int(game_input[2]),
-                str(letters[game_input[3]]),
-                int(game_input[4])
+
+            move_to_try = [                 #Checking for a valid input syntax
+                (letters[game_input[0]])-1,
+                int(game_input[1])-1,
+                (letters[game_input[2]])-1,
+                int(game_input[3])-1
                 ]
-            break
+            
+            # print(move_to_try[0])
+            # print(move_to_try[1])
+            # print(move_to_try[2])
+            # print(move_to_try[3])
+
         except:
+            print("Bad move syntax. Example: b3a4")
             continue
 
+        # print(board[move_to_try[1]][move_to_try[0]][1])
+
+        if board[move_to_try[1]][move_to_try[0]][1] == str(who_move): # Check if you own the peice #the one bracket at the end of the first expression [1] is for getting the middle symbol of [0] or [1] on the board. second character is [1].
+
+            if abs(move_to_try[0]-move_to_try[2]) == 1 and abs(move_to_try[1]-move_to_try[3]) == 1: # Is this a standard move? (computer can't stop u from going backwards yet)
+                if board[move_to_try[3]][move_to_try[2]] == "[ ]": # Is the target space empty?
+                    board[move_to_try[1]][move_to_try[0]] = "[ ]" # remove your peice from where it was
+                    board[move_to_try[3]][move_to_try[2]] = "["+str(who_move)+"]" # place your peice where it goes
+                    break
+            elif abs(move_to_try[0]-move_to_try[2]) == 2 and abs(move_to_try[1]-move_to_try[3]) == 2: # Is this a taking move?
+                if board[move_to_try[3]][move_to_try[2]] == "[ ]": #Is the target space empty?
+
+                    # print((move_to_try[0]+move_to_try[2])/2)
+                    # print((move_to_try[1]+move_to_try[3])/2)
+
+                    if board[int((move_to_try[3]+move_to_try[1])/2)][int((move_to_try[2]+move_to_try[0])/2)] == "["+str(who_not_move)+"]": # Is the space inbetween an enemy?
+                        board[int((move_to_try[3]+move_to_try[1])/2)][int((move_to_try[2]+move_to_try[0])/2)] = "[ ]" # kill enemy
+                        board[move_to_try[1]][move_to_try[0]] = "[ ]" # remove your peice from where it was
+                        board[move_to_try[3]][move_to_try[2]] = "["+str(who_move)+"]" # place your peice where it goes
+                        break
+
+
+            else:
+                print("You can't move here!")
+        else:
+            print("This is not your peice!")
+
+    if who_move == 0: #change who's turn it is
+        who_move = 1
+        who_not_move = 0
+    else:
+        who_move = 0
+        who_not_move = 1
+    if game_input == "stop":
+        break
+
+        
 
 
         #THIS IS THE CODE FOR MAKING A MOVE.
