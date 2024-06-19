@@ -23,7 +23,29 @@ def main():
     print(difficulty_level)
     print(questions)
 
-    print(random.randint(difficulties[difficulty_level-1][0],difficulties[difficulty_level-1][1]))
+    correct = 0
 
-       
+    wrong = 0
+
+    for i in range(0,questions):
+            
+        num1 = (random.randint(difficulties[difficulty_level-1][0],difficulties[difficulty_level-1][1]))
+
+        num2 = (random.randint(difficulties[difficulty_level-1][0],difficulties[difficulty_level-1][1]))
+
+        while True:
+            try:
+                if int(input(f"{num1} + {num2} = ")) == num1+num2:
+                    print("YAY!!!")
+                    correct += 1
+                else:
+                    print("FUCK YOU ):< ")
+                    wrong += 1
+                break
+            except:
+                continue
+
+    print(f"Questions wrong: {wrong}")
+    print(f"Questions right: {correct}")
+        
 main()
