@@ -1,7 +1,19 @@
+import random
+
+def clamp(input,max,min):
+    if input > max:
+        input = max
+    if input < min:
+        input = min
+
+
+
 #  MAKE CHECKERS
 
 
 # 1  2  3  4
+
+abcd = [None,"a","b","c","d","e","f","g"]
 
 # [ ][b][ ][b][ ][b][ ][b][ ]
 # [b][ ][b][ ][b][ ][b][ ][b]
@@ -81,7 +93,7 @@ while True:
     for row in board:
         to_draw = ""
         for space in row:
-            if space == "[0]":
+            if space == "[0]":                            
                 to_draw = to_draw + "["+player_names[0][0]+"]"
             elif space == "[1]":
                 to_draw = to_draw + "["+player_names[1][0]+"]"
@@ -101,10 +113,17 @@ while True:
         
         #The inpupt structure for a move is naming the target spaces. IE a6b5, or a6c4 if you are capturing.
 
-        
+        if game_input == "rand": # this functionality is bad and terrible and a joke lmao
+            xy = [random.randint(1,8),random.randint(1,8)]
+            plus_minus = [1,-1]
+            one_or_two = random.randint(1,2)
 
+            
+
+            game_input = abcd[clamp(xy[0],1,8)] + str(clamp(xy[1])) + abcd[clamp(xy[0]+(one_or_two*plus_minus[random.randint(0,1)]))] + str(clamp(xy[1]+(one_or_two*plus_minus[random.randint(0,1)])))
+
+            print(game_input)
         try:
-
             move_to_try = [                 #Checking for a valid input syntax
                 (letters[game_input[0]])-1,
                 int(game_input[1])-1,
