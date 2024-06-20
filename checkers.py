@@ -1,4 +1,5 @@
 import random
+#import rare
 
 def clamp(input,max,min):
     if input > max:
@@ -10,6 +11,7 @@ def clamp(input,max,min):
 
 #  MAKE CHECKERS
 
+#https://www.happycodeclub.com/python-using-hex-colour-codes/ COLOR MORE HEX COLORS!!
 
 # 1  2  3  4
 
@@ -94,10 +96,10 @@ while True:
         to_draw = ""
         for space in row:
             if space == "[0]":                            
-                to_draw = to_draw + "["+player_names[0][0]+"]"
+                to_draw = to_draw + f"[{bcolors.RED}{player_names[0][0]}{bcolors.WHITE}]"              #Where 0 and 1 become the colored player icons
             elif space == "[1]":
-                to_draw = to_draw + "["+player_names[1][0]+"]"
-            else:
+                to_draw = to_draw + f"[{bcolors.BLUE}{player_names[1][0]}{bcolors.WHITE}]"
+            else:                                                                           
                 to_draw = to_draw + space
             
         print(str(row_number+1)+" "+to_draw) #puts the numbers to left of board
@@ -186,5 +188,7 @@ while True:
         #use capital letter for kings.
 
 
+
+        #
     
         
