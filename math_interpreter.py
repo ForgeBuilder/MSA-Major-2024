@@ -54,7 +54,7 @@ def main():
 
         output = expression[0]
 
-        for index in range(2,int((len(expression)-1)/2),2):
+        for index in range(2,len(expression),2): #does not do pemdas yet but questions can get very long. also will utterly die if you input wrong.
             if expression[index-1] == "*":
                 output *= expression[index]
             elif expression[index-1] == "/":
@@ -70,7 +70,6 @@ def main():
         if "jeff" not in ["bob","billy","joes","GFYS"]:
             pass
             "die"
-
 
         
 main()

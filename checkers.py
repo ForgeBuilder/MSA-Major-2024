@@ -1,12 +1,26 @@
 import random
 #import rare
 
-def clamp(input,max,min):
-    if input > max:
-        input = max
-    if input < min:
-        input = min
+#make snake????
 
+class bcolors: # try to get this class from import?
+    WHITE = '\033[0m' #clears all formatting.
+    RED = '\033[91m'
+    BLUE = '\033[94m'
+
+def clamp(input,min,max):
+    if input > max:
+        return max
+    if input < min:
+        return min
+    else:
+        return input
+
+def is_king(thing):
+    if thing == thing.upper:
+        return True
+    else:
+        return False
 
 
 #  MAKE CHECKERS
@@ -15,7 +29,7 @@ def clamp(input,max,min):
 
 # 1  2  3  4
 
-abcd = [None,"a","b","c","d","e","f","g"]
+abcd = [None,"a","b","c","d","e","f","g","h"]
 
 # [ ][b][ ][b][ ][b][ ][b][ ]
 # [b][ ][b][ ][b][ ][b][ ][b]
@@ -118,11 +132,13 @@ while True:
         if game_input == "rand": # this functionality is bad and terrible and a joke lmao
             xy = [random.randint(1,8),random.randint(1,8)]
             plus_minus = [1,-1]
+            plus_minus = plus_minus[random.randint(0,1)]
+
             one_or_two = random.randint(1,2)
 
             
 
-            game_input = abcd[clamp(xy[0],1,8)] + str(clamp(xy[1])) + abcd[clamp(xy[0]+(one_or_two*plus_minus[random.randint(0,1)]))] + str(clamp(xy[1]+(one_or_two*plus_minus[random.randint(0,1)])))
+            game_input = abcd[clamp(xy[0],1,8)] + str(clamp(xy[1],1,8)) + abcd[clamp(xy[0]+(one_or_two*plus_minus),1,8)] + str(clamp(xy[1]+(one_or_two*plus_minus),1,8))
 
             print(game_input)
         try:
@@ -165,9 +181,9 @@ while True:
                         board[move_to_try[3]][move_to_try[2]] = "["+str(who_move)+"]" # place your peice where it goes
                         break
 
+                            #Need to change stuff with is_king()
 
-            else:
-                print("You can't move here!")
+            print("You can't move here!")
         else:
             print("This is not your peice!")
 
@@ -186,9 +202,5 @@ while True:
         #THIS IS THE CODE FOR MAKING A MOVE.
 
         #use capital letter for kings.
-
-
-
-        #
     
         
