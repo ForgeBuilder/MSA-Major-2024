@@ -1,10 +1,27 @@
-import student
+from student import Student
 import random
+import datetime
 
 class bcolors:
     WHITE = '\033[0m' #clears all formatting.
     RED = '\033[91m'
     BLUE = '\033[94m'
+
+def write_to_error_log(error_message):
+    try:
+        log_file = open("error_log.txt","a") #open 
+
+        log_file.write(f"{datetime.now()}: {error_message}\n") #write datetime and error
+
+        log_file.close() #close
+    except Exception as err:
+        print(err)
+
+    return
+
+#USE WITH:
+
+# write_to_error_log("womp womp") idfk look at kristofferson example
 
 def load_students():
 
@@ -45,22 +62,24 @@ def main():
 
     for scholar in student_data:
         try:
-            students.append(student.Student(scholar[0],scholar[1],scholar[2],scholar[3],scholar[4],scholar[5]))
+            students.append(Student(scholar[0],scholar[1],scholar[2],scholar[3],scholar[4],scholar[5]))
         except:
             data = Jane_john()
-            students.append(student.Student(data[0],data[1],data[2],data[3],data[4],data[5]))
+            students.append(Student(data[0],data[1],data[2],data[3],data[4],data[5]))
             print(f"{bcolors.RED}Missing Values:{bcolors.WHITE} {scholar}")
     
     while True:
         
         try:
             user_input = int(input("Index of student you would like to have data on: "))
+
+            try:
+                students[user_input].print_student_data()
+            except:
+                print("Index out of range.")
         except:
             print("Enter an integer.")
-        try:
-            students[user_input].print_student_data()
-        except:
-            print("Index out of range.")
+        
 
     
 
