@@ -15,11 +15,13 @@ app.config["DEBUG"] = True
 
 student_dictionaries = sg.get_student_dictionary()
 
-@app.route('/',methods=['GET'])
+@app.route('/api/students/all',methods=['GET'])
 def index():
-    return "<h1>Hellow World<h1> <h1>Hellow World<h1> <h1>Hellow World<h1>"
+    return student_dictionaries
 
-app.run(port=5000)
+#"<h1>Hellow World<h1> <h1>Hellow World<h1> <h1>Hellow World<h1>"
+
+app.run(port=5010)
 
 
 
