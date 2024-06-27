@@ -25,7 +25,7 @@ def write_to_error_log(error_message):
 
 def load_students():
 
-    student_file = open("students.csv","r")
+    student_file = open("student_data_api/students.csv","r")
 
     next(student_file)
 
@@ -62,7 +62,7 @@ def get_student_dictionary():
 
     for scholar in student_data:
         try:
-            students.append(Student(scholar[0],scholar[1],scholar[2],scholar[3],scholar[4],scholar[5]))
+            students.append(Student(scholar[0],scholar[1],scholar[5],scholar[2],scholar[4],scholar[3]))
         except:
             data = Jane_john()
             students.append(Student(data[0],data[1],data[2],data[3],data[4],data[5]))
